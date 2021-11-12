@@ -6,20 +6,23 @@ def call() {
                 ],
                 serviceAccount: 'cd-jenkins')
         {
+
             checkout scm
             node("terraform") {
-                checkout scm
-                dir("dev") {
-                    container("terraform") {
-                        stage('terraform init') {
-                            sh "terraform init"
-                        }
-                        stage('terraform plan') {
-                            sh "terraform plan"
-                        }
+                ansiColor('xterm') {
+                    checkout scm
+                    dir("dev") {
+                        container("terraform") {
+                            stage('terraform init') {
+                                sh "terraform init"
+                            }
+                            stage('terraform plan') {
+                                sh "terraform plan"
+                            }
 //                        stage('terraform init') {
 //                            sh "terraform init"
 //                        }
+                        }
                     }
                 }
             }
