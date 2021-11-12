@@ -1,7 +1,8 @@
-podTemplate(label: 'terraform',
-        containers: [
-                containerTemplate(name: 'terraform', image: 'hashicorp/terraform:1.0.11', ttyEnabled: true, command: 'cat')
-        ]) {
+def call() {
+    podTemplate(label: 'terraform',
+            containers: [
+                    containerTemplate(name: 'terraform', image: 'hashicorp/terraform:1.0.11', ttyEnabled: true, command: 'cat')
+            ]) {
         checkout scm
         node("terraform") {
             checkout scm
@@ -18,3 +19,4 @@ podTemplate(label: 'terraform',
             }
         }
     }
+}

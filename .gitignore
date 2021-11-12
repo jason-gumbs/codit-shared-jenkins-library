@@ -7,7 +7,7 @@
 !/jobs
 !/.gitignore
 !/*.xml
-./.idea/
+git .idea/
 
 #ignore all files in jobs subdirectories except for folders
 #note: git doesn't track folders, only file content
