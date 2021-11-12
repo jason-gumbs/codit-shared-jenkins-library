@@ -7,9 +7,10 @@ def call() {
                 serviceAccount: 'cd-jenkins')
         {
             publishChecks detailsURL: 'http://35.239.53.128:8080/', name: 'Monster CI/CD', summary: 'Check code through pipeline', text: 'you can publish checks in pipeline script', title: 'Code Checker'
-            checkout scm
+
             node("terraform") {
                 ansiColor('xterm') {
+                    checkout scm
                     dir("dev") {
                         container("terraform") {
                             stage('terraform init') {
