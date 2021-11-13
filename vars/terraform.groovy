@@ -6,15 +6,19 @@ def call() {
                 ],
                 serviceAccount: 'cd-jenkins')
         {
-            publishChecks detailsURL: 'http://35.239.53.128:8080/', name: 'Monster CI/CD', summary: 'Check code through pipeline', text: 'you can publish checks in pipeline script', title: 'Code Checker'
+            publishChecks detailsURL: 'http://35.239.53.128:8080/job/tf-jenkins-gke-mulri/job/test/', name: 'Monster CI/CD', summary: 'Check code through pipeline', text: 'you can publish checks in pipeline script', title: 'Code Checker'
 
             node("terraform") {
                 ansiColor('xterm') {
                     checkout scm
                     dir("dev") {
                         container("terraform") {
-                            stage('terraform init') {
-                                sh "terraform init"
+                            withChecks(name: 'terraform init') {
+                                // some other steps that will extract the name
+
+                                stage('terraform init') {
+                                    sh "terraform init"
+                                }
                             }
                             stage('terraform plan') {
                                 sh "terraform plan"
