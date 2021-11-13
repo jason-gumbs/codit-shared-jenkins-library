@@ -13,13 +13,12 @@ def call() {
                     checkout scm
                     dir("dev") {
                         container("terraform") {
-                            withChecks(name: 'terraform init') {
-                                // some other steps that will extract the name
+
 
                                 stage('terraform init') {
                                     sh "terraform init"
                                 }
-                            }
+                            
                             stage('terraform plan') {
                                 sh "terraform plan"
                             }
